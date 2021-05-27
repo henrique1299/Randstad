@@ -5,12 +5,14 @@ using System.IO;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Randstad.Models;
 
 namespace Randstad.Controllers
 {
+    //[EnableCors("AllowOrigin")]
     [Route("api/Convert")]
     [ApiController]
     public class ConvertController : ControllerBase
@@ -30,8 +32,8 @@ namespace Randstad.Controllers
         }
 
         // GET: api/Convert/90-70
-        [HttpGet("{id1}-{id2}")]
-        public async Task<ActionResult<Models.Convert>> GetConvert(int id1, int id2)
+        [HttpGet("{id1}-{id2}-{valor}")]
+        public String GetConvert(int id1, int id2, double valor)
         {
             try
             {
@@ -57,19 +59,20 @@ namespace Randstad.Controllers
 
                 response.Close();
 
-                double convertRate = price2 / price1;
+                double convertRate = price1 / price2;
 
                 Models.Convert convert = new Models.Convert();
 
                 convert.id1 = id1;
                 convert.id2 = id2;
-                convert.converted = Math.Round((price1 * convertRate), 2);
+                convert.converted = Math.Round((valor * convertRate), 2);
 
-                return convert;
+                return convert.converted.ToString();
             }
             catch
             {
-                return BadRequest();
+                //return BadRequest();
+                return "400";
             }
         }
         public double getPrice(string json)

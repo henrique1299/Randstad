@@ -28,6 +28,8 @@ namespace Randstad
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<RandstadContext>(opt =>
                                                opt.UseInMemoryDatabase("Coins"));
             services.AddSwaggerGen();
@@ -49,6 +51,12 @@ namespace Randstad
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Randstad v1"));
             }
 
+            app.UseCors(option => option.AllowAnyOrigin());
+            app.UseCors(option => option.WithMethods("GET"));
+            app.UseCors(option => option.AllowAnyHeader());
+            app.UseCors(option => option.AllowCredentials());
+            app.UseCors(option => option.SetPreflightMaxAge(TimeSpan.FromSeconds(5000)));
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -59,6 +67,7 @@ namespace Randstad
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

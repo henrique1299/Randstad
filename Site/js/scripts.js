@@ -8,30 +8,67 @@
 // 
 function Converter()
 {
+    var btn = document.getElementById("btnConverter");
+    btn.disabled = true;
+    btn.innerText = "Carregando";
+
     var coin1 = document.getElementById('coin1');
     var coin2 = document.getElementById('coin2');
-    var coin1 = coin1.options[coin1.selectedIndex];
-    var coin2 = coin2.options[coin2.selectedIndex];
-    //alert(opt.text);
-    const url = "https://localhost:44327/api/Convert/90-70";
-    
-    //var url = document.getElementById('url').value;
+
+    coin1 = coin1.options[coin1.selectedIndex].text;
+    coin2 = coin2.options[coin2.selectedIndex].text;
+
+    var idCoin1 = getCoinId(coin1);
+    var idCcoin2 = getCoinId(coin2);
+
+    var valor = document.getElementById("valorInicial").value;
+    if (valor.length < 1) {
+        alert("Valor Inválido");
+        btn.disabled = false;
+        btn.innerText = "Converter";
+        return null;
+    }
+
+    const url = "https://localhost:44327/api/Convert/" + idCoin1 + "-" + idCcoin2 + "-" + valor;
 
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
 
-    xhttp.setRequestHeader
+    xhttp.setRequestHeader;
 
-    xhttp.onreadystatechange = function(){//Função a ser chamada quando a requisição retornar do servidor
-        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {//Verifica se o retorno do servidor deu certo
+    xhttp.onreadystatechange = function(){
+        if ( xhttp.readyState == 4 && xhttp.status == 200 ) {
             console.log(xhttp.responseText);
-            document.getElementById('valorFinal').innerHTML = xhttp.responseText;
+            document.getElementById('valorFinal').value = xhttp.responseText;
+            btn.disabled = false;
+            btn.innerText = "Converter";
         }
     }
 
     xhttp.send();
+}
 
-    alert("Fim");
+function getCoinId(coin) {
+    if (coin == "Bitcoin")
+    {
+        return "90";
+    }
+    if (coin == "Ethereum") {
+        return "80";
+    }
+    if (coin == "Monero") {
+        return "28";
+    }
+    if (coin == "Zcash") {
+        return "134";
+    }
+    if (coin == "Ethereum Classic") {
+        return "118";
+    }
+    if (coin == "Bitcoin Cash") {
+        return "33234";
+    }
+
 }
 
 async function fetchAsync (url) {
