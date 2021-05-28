@@ -88,7 +88,9 @@ function getCoinId(coin) {
     if (coin == "Bitcoin Cash") {
         return "33234";
     }
-
+    if (coin == "USD") {
+        return "1";
+    }
 }
 
 async function fetchAsync (url) {

@@ -37,19 +37,33 @@ namespace Randstad.Controllers
         {
             try
             {
-                double price1 = coinInfo(id1);
+                double price1 = 0;
 
-                double price2 = coinInfo(id2);
+                double price2 = 0;
 
-                double convertRate = price1 / price2;
+                double price = 0;
 
-                Models.Convert convert = new Models.Convert();
+                if (id1 == 1)
+                {
+                    price2 = coinInfo(id2);
 
-                convert.id1 = id1;
-                convert.id2 = id2;
-                convert.converted = Math.Round((valor * convertRate), 2);
+                    price = Math.Round((valor / price2), 7);
+                }
+                else if (id2 == 1)
+                {
+                    price = coinInfo(id1);
+                }
+                else if (id2 == 1 && id1 == 1)
+                {
+                    price = valor;
+                }
+                else
+                {
+                    double convertRate = price1 / price2;
 
-                return convert.converted.ToString();
+                    price = Math.Round((valor * convertRate), 2);
+                }
+                return price.ToString();
             }
             catch
             {
