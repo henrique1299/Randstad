@@ -6,6 +6,26 @@
 //
 // Scripts
 // 
+/*
+window.onload = function () {
+
+    const url = "https://localhost:44327/api/Convert/";
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+
+    xhttp.setRequestHeader;
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            console.log(xhttp.responseText);
+        }
+    }
+
+    xhttp.send();
+
+}*/
+
 function Converter()
 {
     var btn = document.getElementById("btnConverter");
@@ -21,14 +41,14 @@ function Converter()
     var idCoin1 = getCoinId(coin1);
     var idCcoin2 = getCoinId(coin2);
 
-    var valor = document.getElementById("valorInicial").value;
-    if (valor.length < 1) {
-        alert("Valor Inválido");
-        btn.disabled = false;
-        btn.innerText = "Converter";
-        return null;
+    var valor = document.getElementById("valorInicial");
+    if (valor.value.length < 1) {
+        valor.value = 1;
+        valor = 1;
     }
-
+    else {
+        valor = valor.value;
+    }
     const url = "https://localhost:44327/api/Convert/" + idCoin1 + "-" + idCcoin2 + "-" + valor;
 
     var xhttp = new XMLHttpRequest();

@@ -37,27 +37,9 @@ namespace Randstad.Controllers
         {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.coinlore.net/api/ticker/?id=" + id1);
-                WebResponse response = request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
+                double price1 = coinInfo(id1);
 
-                StreamReader reader = new StreamReader(dataStream);
-
-                String responseFromServer = reader.ReadToEnd();
-
-                double price1 = getPrice(responseFromServer);
-
-                request = (HttpWebRequest)WebRequest.Create("https://api.coinlore.net/api/ticker/?id=" + id2);
-                response = request.GetResponse();
-                dataStream = response.GetResponseStream();
-
-                reader = new StreamReader(dataStream);
-
-                responseFromServer = reader.ReadToEnd();
-
-                double price2 = getPrice(responseFromServer);
-
-                response.Close();
+                double price2 = coinInfo(id2);
 
                 double convertRate = price1 / price2;
 
@@ -75,13 +57,28 @@ namespace Randstad.Controllers
                 return "400";
             }
         }
+        public double coinInfo(int id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.coinlore.net/api/ticker/?id=" + id);
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+
+            StreamReader reader = new StreamReader(dataStream);
+
+            String responseFromServer = reader.ReadToEnd();
+
+            double price = getPrice(responseFromServer);
+
+            response.Close();
+
+            return price;
+        }
         public double getPrice(string json)
         {
             var coin = JsonSerializer.Deserialize<List<Rootobject>>(json);
 
             return double.Parse(coin[0].price_usd, CultureInfo.InvariantCulture);
         }
-
         /*
         // PUT: api/Convert/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

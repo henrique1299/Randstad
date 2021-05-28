@@ -55,7 +55,7 @@ namespace Randstad
             app.UseCors(option => option.WithMethods("GET"));
             app.UseCors(option => option.AllowAnyHeader());
             app.UseCors(option => option.AllowCredentials());
-            app.UseCors(option => option.SetPreflightMaxAge(TimeSpan.FromSeconds(5000)));
+            //app.UseCors(option => option.SetPreflightMaxAge(TimeSpan.FromSeconds(5000)));
 
             app.UseHttpsRedirection();
 
