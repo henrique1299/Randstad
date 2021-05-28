@@ -1,8 +1,8 @@
 # Randstad Teste - Henrique Martins Furtado
 
-# API Methods
+## Métodos da API
 
-## Converter
+#### Converter
   `GET https://{server}:{port}/api/Convert/{id1}-{id2}-{valor}´
    Sendo `id1` e `id2` os ids referentes a `cryptocurrency-data-api` (exceto USD):
    
@@ -14,7 +14,7 @@
       "Bitcoin Cash":"33234";
       "USD":"1";
     
-# Implementação do site (front-end)
+## Implementação do site (front-end)
 
   Mudar a url em `Converter()` dentro de `scripts.js` para o endereço onde a API está localizada:
   `https://{servidor}:{porta}/api/Convert/`
