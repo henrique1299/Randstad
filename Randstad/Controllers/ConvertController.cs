@@ -12,7 +12,7 @@ using Randstad.Models;
 
 namespace Randstad.Controllers
 {
-    //[EnableCors("AllowOrigin")]
+
     [Route("api/Convert")]
     [ApiController]
     public class ConvertController : ControllerBase
@@ -31,7 +31,7 @@ namespace Randstad.Controllers
             return await _context.Convert.ToListAsync();
         }
 
-        // GET: api/Convert/90-70
+        // GET: api/Convert/90-80-1
         [HttpGet("{id1}-{id2}-{valor}")]
         public String GetConvert(int id1, int id2, double valor)
         {
