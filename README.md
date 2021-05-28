@@ -3,8 +3,8 @@
 ## Métodos da API
 
 #### Converter
-  `GET https://{server}:{port}/api/Convert/{id1}-{id2}-{valor}´
-   Sendo `id1` e `id2` os ids referentes a `cryptocurrency-data-api` (exceto USD):
+  `GET https://{server}:{port}/api/Convert/{id1}-{id2}-{valor}`
+   Sendo `id1` e `id2` os IDs referentes a `cryptocurrency-data-api` (exceto USD):
    
       "Bitcoin":"90";
       "Ethereum":"80"
